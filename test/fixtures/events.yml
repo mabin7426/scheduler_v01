@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  category: MyString
+  title: MyString
+  start: 2013-05-28 21:51:54
+  end: 2013-05-28 21:51:54
+  duration: 1
+  breakup: false
+  all_day: false
+  notes: MyText
+  priority: MyString
+  due: 2013-05-28 21:51:54
+  recurring: false
+  task: false
+  user_id: MyString
+
+two:
+  category: MyString
+  title: MyString
+  start: 2013-05-28 21:51:54
+  end: 2013-05-28 21:51:54
+  duration: 1
+  breakup: false
+  all_day: false
+  notes: MyText
+  priority: MyString
+  due: 2013-05-28 21:51:54
+  recurring: false
+  task: false
+  user_id: MyString

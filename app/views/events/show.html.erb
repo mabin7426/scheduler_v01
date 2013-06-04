@@ -1,0 +1,26 @@
+<p><%= link_to "Back", "/events" %></p>
+
+<div class="hero-unit">
+  <h1> More info </h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Priority</th>
+          <th>Duration</th>
+          <th>Due Date</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @event.title %></td>
+          <td><%= @event.priority %></td>
+          <td><%= @event.duration %></td>
+          <td><%= @event.due %></td>
+          <td><%= @event.notes %></td>
+        </tr>
+      </tbody>
+    </table>
+</div>

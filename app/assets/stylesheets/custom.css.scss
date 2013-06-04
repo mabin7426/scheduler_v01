@@ -1,0 +1,47 @@
+@import "bootstrap";
+
+h1 {
+padding-top: 30px;
+text-align: center;
+padding-bottom: 30px;
+}
+
+h2 {
+padding-top: 30px;
+text-align: center;
+padding-bottom: 30px;
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+li {
+  padding-left: 30px;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+.span6 {
+  padding-bottom: 50px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}

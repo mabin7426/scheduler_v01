@@ -1,0 +1,37 @@
+<p> <%= link_to "Back", "/events" %> </p>
+
+<div class="center hero-unit">
+  <h1>Edit</h1>
+  <h2>NOTE: Please fill out every block</h2>
+
+     <%= form_tag "/events/#{@event.id}", method: 'put' do %>
+      <p>
+         <%= label_tag :title, "Title" %>
+         <%= text_field_tag :title, @event.title, placeholder: @event.title %>
+      </p>
+
+      <p>
+        <%= label_tag :priority, "Priority" %>
+        <%= select_tag :priority, options_for_select(["1 = High", "2 = Medium", "3 = Low"], @event.priority) %>
+      </p>
+
+      <p>
+        <%= label_tag :duration, "Duration (in minutes)" %>
+        <%= text_field_tag :duration, @event.duration , size: 80, placeholder: @event.duration %>
+      </p>
+
+      <p>
+        <%= label_tag :due, "Due date" %>
+        <%= text_field_tag :due, @event.due , size: 80, placeholder: @event.due %>
+      </p>
+
+      <p>
+         <%= label_tag :notes, "Notes" %>
+         <%= text_field_tag :notes, @event.notes , size: 80, placeholder: @event.notes %>
+      </p>
+
+       <%= submit_tag "Update task" %>
+
+  <% end %>
+
+</div>

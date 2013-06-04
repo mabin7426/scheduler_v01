@@ -1,0 +1,37 @@
+<p><%= link_to "Back", "/events" %></p>
+
+<div class="center hero-unit">
+  <h1>Create a new task</h1>
+
+  <p>* Required</p>
+    <%= form_tag "/events/" do %>
+      <p>
+        <%= label_tag :title, " * Title" %>
+        <%= text_field_tag :title, "", placeholder: "Write the title here" %>
+      </p>
+
+      <p>
+        <%= label_tag :priority, " * Priority" %>
+        <%= select_tag :priority, options_for_select(["1 = High", "2 = Medium", "3 = Low"], "1 = High") %>
+      </p>
+
+      <p>
+        <%= label_tag :duration, " * Duration in minutes" %>
+        <%= text_field_tag :duration, "", size: 80, placeholder: "e.g. 60" %>
+      </p>
+
+      <p>
+        <%= label_tag :due, "(Optional) Due date e.g. 2013-05-28T15:11:00-0500" %>
+        <%= text_field_tag :due, "", size: 80, placeholder: "e.g. 2013-05-28T15:11:00-500" %>
+      </p>
+
+      <p>
+        <%= label_tag :notes, "(Optional) Notes" %>
+        <%= text_field_tag :notes, "", size: 80, placeholder: "Write any notes" %>
+      </p>
+
+      <%= submit_tag "Create a New Task" %>
+
+    <% end %>
+
+</div>

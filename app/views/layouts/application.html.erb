@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SchedulerV01</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+ <title>SchedulerV01</title>
+ <%= stylesheet_link_tag    "application", :media => "all" %>
+ <%= javascript_include_tag "application" %>
+ <%= csrf_meta_tags %>
 </head>
 <body>
-
+<header class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar-inner">
+<div class="container-fluid">
+ <nav>
+  <ul class="nav pull-right">
+    <% if current_user %>
+      <li>Signed in as <%= current_user.email %></li>
+      <li><%= link_to "Sign out", "/signout" %></li>
+    <% else %>
+      <li><%= link_to "Sign in with Google +", "auth/google_oauth2" %></li>
+    <% end %>
+  </ul>
+ </nav>
+</div>
+</div>
+</header>
+<div class="container-fluid">
 <%= yield %>
-
+</div>
 </body>
 </html>

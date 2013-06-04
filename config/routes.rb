@@ -1,58 +1,38 @@
 SchedulerV01::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  root :to => 'events#index'
+  resources :events
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  # Events #
+  get "/events", controller: 'events', action: 'index' #works
+  post "/events", controller: 'events', action: 'create' #works
+  get "/events/new", controller: 'events', action: 'new' #works
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  get "/events/:id", controller: 'events', action: 'show' #works
+  put "/events/:id", controller: 'events', action: 'update' #works
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  get "/events/:id/edit", controller: 'events', action: 'edit' #works
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  delete "/events/:id", controller: 'events', action: 'destroy' #works w/ validation!
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
 
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
+  get "/delete_all_events", controller: 'events', action: 'delete_all_events' #works
+  get "/delete_all_tasks", controller: 'events', action: 'delete_all_tasks' #works
 
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  #Google Calendar
 
-  # See how all your routes lay out with "rake routes"
+  get "/google_events", controller: 'events', action: 'google_events'
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  # Tasks
+
+  get "/see_tasks", controller: 'events', action: 'see_tasks'
+  get "/add_tasks", controller: 'events', action: 'add_tasks'
+
+  # Omniauth #
+  get "/auth/:provider/callback" => "sessions#create"
+
+  get "/auth/failure", to: redirect('/')
+
+  get "/signout" => "sessions#destroy"
+
 end
