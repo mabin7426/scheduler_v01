@@ -42,6 +42,26 @@ textarea {
   text-align: center;
 }
 
+.center1 {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  left: 50%;
+  margin-left: -200px; /* = -1 * the width of element */
+  float: left;
+  clear: none;
+}
+
+.center2 {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  right: 50%;
+  margin-right: -200px; /* = -1 * the width of element */
+  float: right;
+  clear: none;
+}
+
 .center h1 {
   margin-bottom: 10px;
 }

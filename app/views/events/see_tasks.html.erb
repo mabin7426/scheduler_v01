@@ -6,40 +6,48 @@
 
 
 <div>
-    <div class="span4">
+    <div class="span">
       <div class="center ">
         <h3 class="center">Create a new task</h3>
         <p>* Required</p>
-          <%= form_tag "/see_tasks/" do %>
-            <p>
-              <%= label_tag :title, " * Title" %>
-              <%= text_field_tag :title, "", placeholder: "Write the title here" %>
-            </p>
-            <p>
-              <%= label_tag :priority, " * Priority" %>
-              <%= select_tag :priority, options_for_select(["1 = High", "2 = Medium", "3 = Low"], "1 = High") %>
-            </p>
-            <p>
-              <%= label_tag :duration, " * Duration in minutes" %>
-              <%= text_field_tag :duration, "", size: 80, placeholder: "e.g. 60" %>
-            </p>
-            <p>
-              <%= label_tag :due, "(Optional) Due date e.g. 2013-05-28T15:11:00-0500" %>
-              <%= text_field_tag :due, "", size: 80, placeholder: "e.g. 2013-05-28T15:11:00-500" %>
-            </p>
-            <p>
-              <%= label_tag :notes, "(Optional) Notes" %>
-              <%= text_field_tag :notes, "", size: 80, placeholder: "Write any notes" %>
-            </p>
-            <%= submit_tag "Create a New Task" %>
-          <% end %>
+        <%= form_tag("/see_tasks/", method: 'post', class: "form-horizontal well") do %>
+
+          <div class="control-group">
+            <label class="control-label"><%= label_tag :title, " * Title" %></label>
+            <div class="controls"><%= text_field_tag :title, "", placeholder: "Write the title here" %></div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><%= label_tag :priority, " * Priority" %></label>
+            <div class="controls"><%= select_tag :priority, options_for_select(["1 = High", "2 = Medium", "3 = Low"], "1 = High") %></div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><%= label_tag :duration, " * Duration in minutes e.g. 60" %></label>
+            <div class="controls"><%= text_field_tag :duration, "", size: 80, placeholder: "60" %></div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><%= label_tag :due, "(Optional) Due date e.g. 2013-05-28T15:11:00-0500" %></label>
+            <div class="controls"><%= text_field_tag :due, "", size: 80, placeholder: "2013-05-28T15:11:00-500" %></div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label"><%= label_tag :notes, "(Optional) Notes" %></label>
+            <div class="controls"><%= text_field_tag :notes, "", size: 80, placeholder: "Write any notes" %></div>
+          </div>
+
+        <div class="controls"><%= submit_tag "Create a New Task" %></div>
+
+      <% end %>
+
       </div>
     </div>
 
-    <div class="span8">
+    <div class="span6">
     <h3 class="center"> Your Tasks  </h3>
     <h4><%= link_to "Delete all tasks", "/delete_all_tasks" %></h4>
-      <table class=" center table table-striped">
+      <table class=" center table table-striped hero-unit">
         <thead>
           <tr>
             <th></th>

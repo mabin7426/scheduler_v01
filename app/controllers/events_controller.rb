@@ -60,7 +60,7 @@ class EventsController < ApplicationController
            @resultlist.data["items"].each do |item|
             if item["start"]["dateTime"] > Time.now.beginning_of_day && item["end"]["dateTime"] < Time.now.beginning_of_day.tomorrow
                 event = Event.new
-                event.title = item["summary"].upcase
+                event.title = "EVENT: " + item["summary"].upcase
                 event.start = item["start"]["dateTime"]
                 event.end = item["end"]["dateTime"]
                 event.notes = nil
@@ -114,7 +114,8 @@ class EventsController < ApplicationController
           f = @events.first
           first_free_slot = Event.new
           first_free_slot.title = "Free Time".upcase
-          first_free_slot.start = Time.now.beginning_of_day
+          start = Time.now.beginning_of_day.to_i + (8*60*60) # This starts free time at 8:00 AM
+          first_free_slot.start = Time.at(start)
           first_free_slot.end = f.start
           first_free_slot.duration = (first_free_slot.end - first_free_slot.start).to_i
           first_free_slot.priority = "1 = High"          # first_free_slot.task = false
@@ -147,7 +148,7 @@ class EventsController < ApplicationController
                 end_time = @free_time[j].start.to_i + (@tasks[z].duration * 60)
                 slot_task.end = Time.at(end_time)
                 slot_task.duration = (slot_task.end - slot_task.start).to_i
-                slot_task.priority = "1 = High"
+                slot_task.priority = "if"
                 slot_task.task = false
                 slot_task.save
 
@@ -156,24 +157,29 @@ class EventsController < ApplicationController
                 @free_time[j].duration = (@free_time[j].end - @free_time[j].start).to_i
                 # new_free_time.task = false
                 @free_time[j].save
-                z = z + 1
+                if @tasks[z+1] == nil
+                  break
+                else
+                  z = z + 1
+                end
               else
                 j = j + 1
-                # slot_task = Event.new
-                # slot_task.title = "TASK: #{@tasks[z].title}"
-                # slot_task.start = @free_time[j].start
-                # end_time = @free_time[j].start.to_i + (@tasks[z].duration * 60)
-                # slot_task.end = Time.at(end_time)
-                # slot_task.duration = slot_task.end - slot_task.start
-                # slot_task.task = false
-                # slot_task.save
+                slot_task = Event.new
+                slot_task.title = "#{@tasks[z].title}"
+                slot_task.start = @free_time[j].start
+                end_time = @free_time[j].start.to_i + (@tasks[z].duration * 60)
+                slot_task.end = Time.at(end_time)
+                slot_task.duration = (slot_task.end - slot_task.start).to_i
+                slot_task.priority = "else"
+                slot_task.task = false
+                slot_task.save
 
-                # @free_time[j].start = slot_task.end
-                # @free_time[j].end = @free_time[j].end
-                # @free_time[j].duration = @free_time[j].end - @free_time[j].start
-                # # new_free_time.t+1ask = false
-                # @free_time[j].save
-                # z = z+1
+                @free_time[j].start = slot_task.end
+                @free_time[j].end = @free_time[j].end
+                @free_time[j].duration = @free_time[j].end - @free_time[j].start
+                # new_free_time.t+1ask = false
+                @free_time[j].save
+                z = z+1
               end
             end
             if @tasks[z+1] == nil && @tasks[z] == @tasks.last
@@ -184,7 +190,7 @@ class EventsController < ApplicationController
                   end_time = @free_time[j].start.to_i + (@tasks[z].duration * 60)
                   slot_task.end = Time.at(end_time)
                   slot_task.duration = (slot_task.end - slot_task.start).to_i
-                  slot_task.priority = "1 = High"
+                  slot_task.priority = "last"
                   slot_task.task = false
                   slot_task.save
 
@@ -193,10 +199,13 @@ class EventsController < ApplicationController
                   @free_time[j].duration = (@free_time[j].end - @free_time[j].start).to_i
                   # new_free_time.task = false
                   @free_time[j].save
+                  break
                 # else
                   # give a notice that the final task was not able to be added
                 end
+                break
              end
+             break
            end
           end
 
