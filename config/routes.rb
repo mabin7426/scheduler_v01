@@ -4,7 +4,7 @@ SchedulerV01::Application.routes.draw do
 
   # Events #
   get "/events", controller: 'events', action: 'index' #works
-  post "/events", controller: 'events', action: 'create' #works
+  post "/see_tasks", controller: 'events', action: 'create' #works
   get "/events/new", controller: 'events', action: 'new' #works
 
   get "/events/:id", controller: 'events', action: 'show' #works
@@ -26,7 +26,6 @@ SchedulerV01::Application.routes.draw do
   # Tasks
 
   get "/see_tasks", controller: 'events', action: 'see_tasks'
-  get "/add_tasks", controller: 'events', action: 'add_tasks'
 
   # Omniauth #
   get "/auth/:provider/callback" => "sessions#create"
