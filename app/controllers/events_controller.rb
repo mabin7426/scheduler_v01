@@ -43,7 +43,7 @@ class EventsController < ApplicationController
             parameters: {
               calendarId: @user.calendar_id,
               maxResults: 30,
-              timeZone: "America/Chicago",
+              # timeZone: "America/Chicago",
               orderBy: "startTime",
               singleEvents: true,
               timeMin: "2013-01-01T00:00:00-0500"}
